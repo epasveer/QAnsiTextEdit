@@ -1,10 +1,10 @@
 #pragma once
 
-#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QWidget>
 #include <QtCore/QString>
 
-class QAnsiTextEdit : public QTextEdit {
+class QAnsiTextEdit : public QPlainTextEdit {
 
     Q_OBJECT
 
