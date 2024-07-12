@@ -2,7 +2,35 @@
 
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QWidget>
+#include <QtGui/QColor>
+#include <QtGui/QTextCharFormat>
 #include <QtCore/QString>
+#include <QtCore/QList>
+
+class QAnsiTextEditFormattedText {
+    public:
+        QAnsiTextEditFormattedText() = default;
+        QAnsiTextEditFormattedText(const QString& txt, const QTextCharFormat& fmt = QTextCharFormat());
+
+        QString         text;
+        QTextCharFormat format;
+};
+
+class QAnsiTextEditEscapeCodeHandler {
+    public:
+        QList<QAnsiTextEditFormattedText>   parseText           (const QAnsiTextEditFormattedText& input);
+        void                                endFormatScope      ();
+
+    private:
+        void                                setFormatScope      (const QTextCharFormat& charFormat);
+        QColor                              ansiColor           (uint code);
+
+        bool                                _previousFormatClosed = true;
+        bool                                _waitingForTerminator = false;
+        QString                             _alternateTerminator;
+        QTextCharFormat                     _previousFormat;
+        QString                             _pendingText;
+};
 
 class QAnsiTextEdit : public QPlainTextEdit {
 
@@ -12,6 +40,11 @@ class QAnsiTextEdit : public QPlainTextEdit {
         explicit QAnsiTextEdit(QWidget* parent = 0);
         explicit QAnsiTextEdit(const QString& text, QWidget* parent = 0);
        ~QAnsiTextEdit();
+
+    public slots:
+        void            setAnsiText             (const QString& text);
+        void            appendAnsiText          (const QString& text);
+        void            insertAnsiText          (const QString& text);
 
     private:
 
