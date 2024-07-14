@@ -47,6 +47,7 @@ endif()
 set(HEADER_FILES
     Example.h
     QAnsiTextEdit.h
+    ANSI-color-codes.h
     )
 
 set(SOURCE_FILES

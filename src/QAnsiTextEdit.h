@@ -47,6 +47,7 @@ class QAnsiTextEdit : public QPlainTextEdit {
         void            insertAnsiText          (const QString& text);
 
     private:
+        QAnsiTextEditEscapeCodeHandler      _escapeCodeHandler;
 
 };
 
