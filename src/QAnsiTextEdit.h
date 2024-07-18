@@ -20,9 +20,10 @@ class QAnsiTextEditEscapeCodeHandler {
     public:
         QList<QAnsiTextEditFormattedText>   parseText           (const QAnsiTextEditFormattedText& input);
         void                                endFormatScope      ();
+        void                                setFormatScope      (const QTextCharFormat& charFormat);
+        QTextCharFormat                     formatScope         () const;
 
     private:
-        void                                setFormatScope      (const QTextCharFormat& charFormat);
         QColor                              ansiColor           (uint code);
 
         bool                                _previousFormatClosed = true;
@@ -40,6 +41,9 @@ class QAnsiTextEdit : public QPlainTextEdit {
         explicit QAnsiTextEdit(QWidget* parent = 0);
         explicit QAnsiTextEdit(const QString& text, QWidget* parent = 0);
        ~QAnsiTextEdit();
+
+    private:
+        void            dumpCharFormat          (QString string, QTextCharFormat format);
 
     public slots:
         void            setAnsiText             (const QString& text);
