@@ -162,44 +162,44 @@ QList<QAnsiTextEditFormattedText> QAnsiTextEditEscapeCodeHandler::parseText (con
                 const uint code = numbers.at(i).toUInt();
 
                 if (code >= TextColorStart && code <= TextColorEnd) {
-                    qDebug() << "TextColorStart/TextColorEnd called";
+                    //qDebug() << "TextColorStart/TextColorEnd called";
                     charFormat.setForeground(ansiColor(code - TextColorStart));
                     setFormatScope(charFormat);
                 }else if (code >= BackgroundColorStart && code <= BackgroundColorEnd) {
-                    qDebug() << "BackgroundColorStart/BackgroundColorEnd called";
+                    //qDebug() << "BackgroundColorStart/BackgroundColorEnd called";
                     charFormat.setBackground(ansiColor(code - BackgroundColorStart));
                     setFormatScope(charFormat);
                 }else{
                     switch (code) {
                         case ResetFormat:
-                            qDebug() << "ResetFormat called";
+                            //qDebug() << "ResetFormat called";
                             charFormat = QTextCharFormat();
                             setFormatScope(charFormat);
                             endFormatScope();
                             break;
                         case BoldText:
-                            qDebug() << "BoldText called";
+                            //qDebug() << "BoldText called";
                             charFormat.setFontWeight(QFont::ExtraBold);
                             setFormatScope(charFormat);
                             break;
                         case UnderLinedText:
-                            qDebug() << "UnderLinedText called";
+                            //qDebug() << "UnderLinedText called";
                             charFormat.setFontUnderline(true);
                             setFormatScope(charFormat);
                             break;
                         case DefaultTextColor:
-                            qDebug() << "DefaultTextColor called";
+                            //qDebug() << "DefaultTextColor called";
                             charFormat.setForeground(input.format.foreground());
                             setFormatScope(charFormat);
                             break;
                         case DefaultBackgroundColor:
-                            qDebug() << "DefaultBackgroundColor called";
+                            //qDebug() << "DefaultBackgroundColor called";
                             charFormat.setBackground(input.format.background());
                             setFormatScope(charFormat);
                             break;
                         case RgbTextColor:
                         case RgbBackgroundColor:
-                            qDebug() << "RgbTextColor/RgbBackgroundColor called";
+                            //qDebug() << "RgbTextColor/RgbBackgroundColor called";
                             // See http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
                             if (++i >= numbers.size()) {
                                 break;
@@ -324,7 +324,7 @@ void QAnsiTextEdit::setAnsiText (const QString& text) {
     // Print each sub text object. Each one has its own text format.
     for (const QAnsiTextEditFormattedText& ftext : ftexts) {
 
-        dumpCharFormat(ftext.text, ftext.format);
+        //dumpCharFormat(ftext.text, ftext.format);
 
         QTextCursor cursor = textCursor();
         cursor.setCharFormat(ftext.format);
